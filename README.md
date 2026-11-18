@@ -2,6 +2,14 @@
 
 一个轻量的原生 macOS 计算稿纸。输入算式就会在同一行右侧显示结果，按回车可以把结果带到下一行接着算。
 
+## 下载安装
+
+[下载计算便笺 1.3（ZIP）](https://github.com/lilei9370-glitch/calc-scratchpad/releases/download/v1.3/CalcScratchpad-1.3-macOS-arm64.zip) · [查看发布页](https://github.com/lilei9370-glitch/calc-scratchpad/releases/tag/v1.3)
+
+适用于 Apple 芯片的 Mac，需 macOS 14 或更新版本。解压后，把「计算便笺」拖到「应用程序」文件夹，即可打开。
+
+发布包使用临时签名，未经过 Apple 公证。首次打开时，如果 macOS 提示无法验证开发者，确认下载来源后，参照 [Apple 官方打开说明](https://support.apple.com/zh-cn/102445) 操作。
+
 ## 使用
 
 - 用 ↑ 和 ↓ 在算式之间移动。
