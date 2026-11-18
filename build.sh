@@ -1,7 +1,8 @@
 #!/bin/zsh
 set -eu
 cd -- "${0:A:h}"
-app="${1:-$HOME/Applications/计算便笺.app}"
+app="${1:-$PWD/dist/计算便笺.app}"
+identity="${CODE_SIGN_IDENTITY:--}"
 build=$(mktemp -d "${TMPDIR:-/tmp}/scratchpad-build.XXXXXXXX")
 trap 'rm -rf -- "$build"' EXIT
 bundle="$build/计算便笺.app"
@@ -35,7 +36,10 @@ mkdir -p "$build/AppIcon.iconset"
 xcrun swift AppIcon.swift "$build/AppIcon.iconset"
 iconutil -c icns -o "$bundle/Contents/Resources/AppIcon.icns" "$build/AppIcon.iconset"
 xcrun swiftc -parse-as-library -O -target arm64-apple-macos14.0 Scratchpad.swift -o "$bundle/Contents/MacOS/Scratchpad"
-codesign --force --sign - "$bundle"
+sign=(--force --sign "$identity")
+if [[ "$identity" != "-" ]]; then sign+=(--options runtime --timestamp); fi
+codesign "${sign[@]}" "$bundle"
+codesign --verify --strict "$bundle"
 mkdir -p "${app:h}"
 ditto "$bundle" "$app"
 print -r -- "$app"

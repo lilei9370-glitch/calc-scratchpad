@@ -4,9 +4,9 @@
 
 ## 下载安装
 
-[下载计算便笺 1.3（ZIP）](https://github.com/lilei9370-glitch/calc-scratchpad/releases/download/v1.3/CalcScratchpad-1.3-macOS-arm64.zip) · [查看发布页](https://github.com/lilei9370-glitch/calc-scratchpad/releases/tag/v1.3)
+[下载计算便笺 1.3（DMG）](https://github.com/lilei9370-glitch/calc-scratchpad/releases/download/v1.3/CalcScratchpad-1.3-macOS-arm64.dmg) · [查看发布页](https://github.com/lilei9370-glitch/calc-scratchpad/releases/tag/v1.3)
 
-适用于 Apple 芯片的 Mac，需 macOS 14 或更新版本。解压后，把「计算便笺」拖到「应用程序」文件夹，即可打开。
+适用于 Apple 芯片的 Mac，需 macOS 14 或更新版本。打开 DMG，把「计算便笺」拖到窗口里的「应用程序」，然后从「应用程序」打开。
 
 发布包使用临时签名，未经过 Apple 公证。首次打开时，如果 macOS 提示无法验证开发者，确认下载来源后，参照 [Apple 官方打开说明](https://support.apple.com/zh-cn/102445) 操作。
 
@@ -32,8 +32,16 @@ xcode-select --install
 git clone https://github.com/lilei9370-glitch/calc-scratchpad.git
 cd calc-scratchpad
 ./build.sh
-open "$HOME/Applications/计算便笺.app"
+open "dist/计算便笺.app"
 ```
+
+若要生成本地下载包，构建后执行下面这条命令。ZIP 包含完整 App、离线运算资源及其许可证。
+
+```sh
+ditto -c -k --keepParent "dist/计算便笺.app" "dist/CalcScratchpad-1.3-macOS-arm64.zip"
+```
+
+正式分发时，用 `CODE_SIGN_IDENTITY="Developer ID Application: …" ./build.sh` 构建，再按 Apple 的流程公证并装订后重新打包。 [Apple 公证指引](https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution)
 
 ## 实现与许可证
 
